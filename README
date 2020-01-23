@@ -1,0 +1,61 @@
+INSTALLATION
+============
+Installation is pretty easy.
+
+- ./configure
+- Check Makefile.settings
+- make
+- make install
+
+
+BACKGROUNDS
+===========
+
+The background of Rotix is a newsgroup where people liked to make jokes with
+rot-xx obfuscations. At one point translating it by hand became to much of a
+bother and I wrote rot, to do this for me.
+
+rot was kind of a personal project and very primitive. I didn't bother much
+for an interface, since I was the only person to use it. rot was a very
+handy tool, but if I wanted to translate more than one line of text, it
+would become annoying. So a new version was due.
+
+At that time I was getting interested in Open-Source Software and in
+releasing software. I wanted to do something back to the community who gave
+me so much. Of course the project had to have a name: Rotix, derived from
+the Dutch pronunciation of ROT-x. Rotix 0.7 was the result of this.
+
+
+WEBSITE
+=======
+
+Of course Rotix has a website. You may even have downloaded this package
+from it. The website contains an HTML-version of the Rotix man-page and some
+of the cryptographic theories behind Rotix. The address is:
+
+http://elektron.its.tudelft.nl/~hemmin98/rotix.html
+
+
+LEGAL
+=====
+
+Rotix is distributed under the GPL (GNU General Public License). See the
+file COPYING for this license.
+
+	Rotix - A program to generate rotational obfuscations
+	Copyright (C) 2001  Sjoerd Hemminga
+
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful, but
+	WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+	General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+	USA

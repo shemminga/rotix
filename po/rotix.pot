@@ -1,0 +1,110 @@
+# Rotix - (Translated: <language> PO-file)
+# Copyright (C) YEAR Free Software Foundation, Inc.
+#
+# First author:
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Changes by:
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2002-02-06 22:01+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+
+#: rotix.c:134 rotix.c:145 rotix.c:185
+msgid "rotix: you cannot specify both an inputfile and a text\n"
+msgstr ""
+
+#: rotix.c:142
+#, c-format
+msgid "rotix: error opening file %s for reading\n"
+msgstr ""
+
+#: rotix.c:176
+#, c-format
+msgid "rotix: error opening file %s for writing\n"
+msgstr ""
+
+#: rotix.c:191 rotix.c:243 rotix.c:264 rotix.c:291
+msgid "rotix: not enough memory\n"
+msgstr ""
+
+#: rotix.c:200
+msgid "rotix: fixme\n"
+msgstr ""
+
+#: rotix.c:237
+msgid "rotix: error creating temporary file\n"
+msgstr ""
+
+#: help.c:36
+msgid "Usage:\n"
+msgstr ""
+
+#: help.c:37
+msgid "       rotix [ -f <file> ] [ -o <file> ] [ -r <value> ]\n"
+msgstr ""
+
+#: help.c:38
+msgid ""
+"       rotix -t <text> [ -o <file> ] [ -r <value> ]\n"
+"\n"
+msgstr ""
+
+#: help.c:40
+msgid "-f <file>  specify input-file\n"
+msgstr ""
+
+#: help.c:41
+msgid "-o <file>  specify output-file\n"
+msgstr ""
+
+#: help.c:42
+msgid "-r <value> specify the value to rotate with\n"
+msgstr ""
+
+#: help.c:43
+msgid "-a         use all sane values to rotate with\n"
+msgstr ""
+
+#: help.c:44
+msgid "-R         rotate right\n"
+msgstr ""
+
+#: help.c:45
+msgid "-L         rotate left\n"
+msgstr ""
+
+#: help.c:46
+msgid ""
+"-t <text>  specify the text to rotate\n"
+"\n"
+msgstr ""
+
+#: help.c:48
+msgid "For complete documentation:\n"
+msgstr ""
+
+#: help.c:51
+msgid "Report bugs to: sjoerd@huiswerkservice.nl\n"
+msgstr ""
+
+#: help.c:56
+msgid ""
+"Rotix version 0.82\n"
+"\n"
+msgstr ""
+
+#: help.c:60
+msgid ""
+"Rotix is licensed under the GNU General Public License. See the file "
+"COPYING\n"
+"for details.\n"
+msgstr ""

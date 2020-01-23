@@ -1,0 +1,122 @@
+.\" man page for Rotix
+.\" (C) 2001 Sjoerd Hemminga
+.\"
+.\"	This program is free software; you can redistribute it and/or modify
+.\"	it under the terms of the GNU General Public License as published by
+.\"	the Free Software Foundation; either version 2 of the License, or
+.\"	(at your option) any later version.
+.\"
+.\"	This program is distributed in the hope that it will be useful, but
+.\"	WITHOUT ANY WARRANTY; without even the implied warranty of
+.\"	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+.\"	General Public License for more details.
+.\"
+.\"	You should have received a copy of the GNU General Public License
+.\"	along with this program; if not, write to the Free Software
+.\"	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+.\"	USA
+.TH ROTIX 1 "January 18, 2002" Rotix "Linux User Manuals"
+.SH NAME
+rotix \- A program to generate rotational obfuscations
+.SH SYNOPSIS
+.BI "rotix [ \-f " "file " "] [ \-o " "file " "] [ \-r " "value " "]"
+
+.BI "rotix \-t " "text " "[ \-o " "file " "] [ \-r " "value " "]"
+.SH DESCRIPTION
+.B rotix
+is a program that creates rotational obfuscations. Most famously in this
+field is the ROT-13 obfuscation.
+
+Please note that
+.B rotix
+creates obfuscations and not encryptions. You should not consider your data
+safe when you ran
+.B rotix
+over it.
+.BR rotix -like
+programs are only used to have a "public secret". Mostly to prevent
+people from directly reading it, in case of offensive material or the like.
+Use it as such and not as an encryption tool. If you want to encrypt your
+data have a look at
+.BR gpg (1).
+.SH OPTIONS
+.TP
+.B \-f file, \-\-file=file
+Specifies a file that contains the text to rotate. This can be stdin
+(indicated with a dash "\-").
+
+This option cannot be used in conjunction with
+.BR "\-t" ". When neither is given, " "\-f \- " "is assumed."
+.TP
+.B \-o file, \-\-output=file
+The output is appended to the specified file. You can specify stdout (again,
+indicated by a single dash "\-"). In fact, stdout is assumed when this
+option is omitted.
+.TP
+.B \-r value, \-\-rot=value
+Specifies the rotational value to use. When
+.BR "\-r " "is omitted, " "\-r 13 "
+is assumed. Negative values are accepted.
+
+A special value is 'auto'.
+.B rotix
+will then output every unique obfuscation. Please note that this generates
+at least 25 lines of output. You might want to specify an output-file or
+pipe it to more or less.
+.TP
+.B \-a, \-\-auto
+Alias for
+.B \-r auto
+.TP
+.B \-t text, \-\-text=text
+This specifies the text to rotate. You cannot use it in conjunction with
+.BR \-f .
+
+Please note that
+.B \-t
+takes exactly 1 (one) parameter. So if you have special characters (like
+spaces) in your text, you might want to escape or quote them.
+.TP
+.B \-R, \-\-right
+This rotates the letters to the right. [Default]
+.TP
+.B \-L, \-\-left
+This rotates the letters to the left.
+.TP
+.B \-h, \-\-help
+Displays the command-line options.
+.TP
+.B \-v, \-\-version
+Outputs the version number of
+.BR rotix .
+.SH TIPS
+If you have large amounts of text that is rotated and of which you do not
+what the rotational value is, specify the
+.B \-t
+option and give the first line of the text as parameter. Use
+.B \-a
+to check which rotational value is used. Then use that value to deobfuscate
+the entire text. This is easier and faster.
+
+If you specify
+.B \-a
+it is always a good idea to use less.
+
+.B Rotix
+has the ability to recalculate values. A rotational value of 27 will be
+recalculated to 1.
+.B Rotix
+can also handle negative values. However, you can use the
+.BR \-L " and " \-R " options"
+as well to keep using the same values. It is a matter of taste.
+.SH COPYRIGHT
+Rotix is Copyright \(co 2001 Sjoerd Hemminga
+
+This is free software; see the source for copying conditions. There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+.SH REPORTING BUGS
+Please report bugs to <sjoerd@huiswerkservice.nl>
+.SH AUTHOR
+Sjoerd Hemminga <sjoerd@huiswerkservice.nl>
+.SH SEE ALSO
+.BR gpg (1)

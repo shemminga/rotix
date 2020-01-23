@@ -1,0 +1,177 @@
+#!/bin/sh
+# Rotix precompile configure utility.
+# Thanks to Wilmer van der Gaast who did most of te work for his
+# download accelerator Axel <http://www.lintux.cx/axel.html>
+
+# defaults
+prefix='/usr/local'
+bindir='$prefix/bin'
+etcdir='$prefix/etc'
+mandir='$prefix/man'
+locale='$prefix/share/locale'
+
+i18n=0
+debug=0
+strip=1
+
+arch=`uname -s`
+
+while [ -n "$1" ]; do
+	e="`expr "$1" : '--\(.*=.*\)'`"
+	if [ -z "$e" ]; then
+		cat<<EOF
+Rotix configure
+
+Usage: $0 [OPTIONS]
+Option          Description                             Default
+
+--prefix=...    Directories to put files in             $prefix
+--bindir=...                                            $bindir
+--etcdir=...                                            $etcdir
+--mandir=...                                            $mandir
+--locale=...                                            $locale
+
+--i18n=0/1      Disable/enable internationalization     $i18n
+--debug=0/1     Disable/enable debugging                $debug
+--strip=0/1	Disable/enable stripping		$strip
+EOF
+		exit;
+	fi
+
+	eval "$e"
+	shift;
+done
+
+# Expand $prefix
+bindir=`eval echo $bindir`
+etcdir=`eval echo $etcdir`
+mandir=`eval echo $mandir`
+locale=`eval echo $locale`
+
+cat<<EOF>Makefile.settings
+PREFIX=$prefix
+BINDIR=$bindir
+ETCDIR=$etcdir
+MANDIR=$mandir
+LOCALE=$locale
+
+DESTDIR=
+LFLAGS=
+
+EOF
+
+if [ "$i18n" = "1" ]; then
+	if ! type msgfmt > /dev/null 2> /dev/null; then
+		echo 'WARNING: Internationalization disabled, you don'\''t have the necessary files'
+		echo '         installed.'
+		echo ''
+		i18n=0;
+	fi;
+fi
+
+if [ "$debug" = "1" ]; then
+	echo 'DEBUG=1' >> Makefile.settings
+fi
+
+if [ "$i18n" = "1" ]; then
+	echo 'I18N=1' >> Makefile.settings
+	echo 'PACKAGE=rotix' >> Makefile.settings
+	if cat /usr/local/include/libintl.h > /dev/null 2>/dev/null; then
+		echo 'CFLAGS+=-I/usr/local/include' >> Makefile.settings
+		echo 'LFLAGS+=-L/usr/local/lib' >> Makefile.settings;
+	fi;
+fi
+
+if type gcc > /dev/null 2> /dev/null; then
+	echo "CC=gcc" >> Makefile.settings;
+elif type cc > /dev/null 2> /dev/null; then
+	echo "CC=cc" >> Makefile.settings;
+else
+	echo 'Cannot find a C compiler, aborting.'
+	exit 1;
+fi
+
+if [ "$strip" = "1" ]; then
+	if type strip > /dev/null 2> /dev/null; then
+		echo "STRIP=strip" >> Makefile.settings;
+	elif type /usr/ccs/bin/strip 2> /dev/null; then
+		echo "STRIP=/usr/ccs/bin/strip" >> Makefile.settings;
+	elif type gstrip > /dev/null 2> /dev/null; then
+		echo "STRIP=gstrip" >> Makefile.settings;
+	else
+		echo 'No strip utility found, cannot remove unnecessary parts from executable.'
+		echo ''
+		echo 'STRIP=0' >> Makefile.settings;
+	fi
+else
+	echo 'STRIP=0' >> Makefile.settings;
+fi
+
+case "$arch" in
+FreeBSD )
+	echo 'NO_GETOPT_LONG=1' >> Makefile.settings
+	if [ "$i18n" = "1" ]; then
+		echo 'LFLAGS+=-lintl' >> Makefile.settings;
+	fi
+	echo 'Please keep in mind that you need GNU make to make Rotix!'
+	echo ''
+;;
+OpenBSD )
+	echo 'NO_GETOPT_LONG=1' >> Makefile.settings
+	if [ "$i18n" = "1" ]; then
+		echo 'LFLAGS+=-lintl' >> Makefile.settings;
+	fi
+	echo 'Please keep in mind that you need GNU make to make Rotix!'
+	echo ''
+;;
+Darwin )
+	echo 'NO_GETOPT_LONG=1' >> Makefile.settings
+	if [ "$i18n" = "1" ]; then
+		echo 'LFLAGS+=-lintl' >> Makefile.settings;
+	fi
+	echo 'Please keep in mind that you need GNU make to make Rotix!'
+	echo ''
+;;
+Linux | atheos | GNU )
+;;
+SunOS )
+	echo 'NO_GETOPT_LONG=1' >> Makefile.settings
+	if [ "$i18n" = "1" ]; then
+		echo 'Solaris+i18n did not work on my system, but YMMV.'
+		echo ''
+		echo 'LFLAGS+=-lintl' >> Makefile.settings;
+	fi
+	echo 'Please keep in mind that you need GNU make to make Rotix!'
+	echo ''
+;;
+CYGWIN_* )
+	if [ "$i18n" = "1" ]; then
+		echo 'LFLAGS+=-lintl' >> Makefile.settings;
+	fi
+;;
+* )
+	echo 'NO_GETOPT_LONG=1' >> Makefile.settings
+	if [ "$i18n" = "1" ]; then
+		echo 'LFLAGS+=-lintl' >> Makefile.settings;
+	fi
+	echo 'WARNING: This architecture is not tested!'
+;;
+esac
+                
+echo 'Configuration done:'
+echo '  Compiling for: ' $arch
+if [ "$i18n" = "1" ]; then
+	echo '  Internationalization enabled.';
+else
+	echo '  Internationalization disabled.';
+fi
+if [ "$debug" = "1" ]; then
+	echo '  Debugging enabled.';
+else
+	echo '  Debugging disabled.';
+fi
+if [ "$strip" = "1" ]; then
+	echo '  Stripping enabled.';
+else
+	echo '  Stripping disabled.';
+fi

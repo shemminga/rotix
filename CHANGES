@@ -1,0 +1,35 @@
+03 Apr 2002: Rotix 0.83
+
+- Fixed a bug in the Makefile, which caused problems when compiling for
+  FreeBSD
+- Actually made -R/-L working. They were still bound to old test-switches
+  (-d/-D).
+- The ./configure now recognizes The Hurd and rotix has been reported to
+  work.
+
+06 Feb 2002: Rotix 0.82
+
+- Fixed a bug in automated stdin-obfuscation.
+
+27 Jan 2002: Rotix 0.81
+
+- Added an option -a as alias for -r auto.
+- Added a ./configure Thanks to Wilmer van der Gaast.
+- Added some patches to increase portability.
+- Added the possibility to automate obfuscation of stdin.
+
+10 Nov 2001: Rotix 0.8
+
+- Added command-line options that allows the user to control the direction
+  of rotating (-R and -L).
+- Added I18N support.
+- Changed the --help output, so it fits on one screen.
+- Fixed a bug, which allowed both stdin and a text to be specified on the
+  command-line, when entered in a certain sequence.
+
+13 Oct 2001: Rotix 0.71
+- Fixed a bug, which causes blank lines to have the contents of the previous
+  line.
+
+18 Sep 2001: Rotix 0.7
+- First release.
