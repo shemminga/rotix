@@ -1,0 +1,2 @@
+option('i18n', type: 'boolean', value: true)
+
